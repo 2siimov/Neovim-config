@@ -37,12 +37,12 @@ set foldmethod=indent
 set foldlevel=99
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-
 noremap <LEADER><CR> :nohlsearch<CR>
 map sh :set nosplitright<CR>:vsplit<CR>
 map sk :set nosplitbelow<CR>:split<CR>
 map sl :set splitright<CR>:vsplit<CR>
 map sj :set splitbelow<CR>:split<CR>
+map ; :
 
 map Q :q<CR>
 map W :w<CR>
@@ -61,6 +61,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'connorholyday/vim-snazzy'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
