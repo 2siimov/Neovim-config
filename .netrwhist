@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/asiimov/Music/Vocaloid/ピノキオピー Live from 五臓六腑 Tour 2019 at Tokyo'
+let g:netrw_dirhist_3='/Users/asiimov/OneDrive/学术/Advanced Placements/AP Calculus'
+let g:netrw_dirhist_2='/Users/asiimov/OneDrive/学术/Advanced Placements'
+let g:netrw_dirhist_1='/Users/asiimov/.oh-my-zsh'
