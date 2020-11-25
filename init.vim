@@ -36,21 +36,22 @@ set foldlevel=99
 set scrolloff=5
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-noremap nt :NERDTreeToggle<CR>
-
 noremap <LEADER><CR> :nohlsearch<CR>
 map sh :set nosplitright<CR>:vsplit<CR>
 map sk :set nosplitbelow<CR>:split<CR>
 map sl :set splitright<CR>:vsplit<CR>
 map sj :set splitbelow<CR>:split<CR>
 
-map ff :Leaderf file<CR>
+map S :w<CR>
 
+noremap ft :NERDTree<CR>
+map ff :Files<CR>
+map <LEADER>ft :NERDTreeToggle<CR>
 
 map Q :q<CR>
 map W :w<CR>
 
-map ; :Files<CR>
+map ; :
 
 map <LEADER>l <C-w>l
 map <LEADER>h <C-w>h
@@ -84,31 +85,31 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
+" Recently vim can merge signcolumn and number column into one
+set signcolumn=number
 else
-  set signcolumn=yes
+set signcolumn=yes
 endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
@@ -131,13 +132,13 @@ nmap <silent> gr <Plug>(coc-references)
 " nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
+if (index(['vim','help'], &filetype) >= 0)
+execute 'h '.expand('<cword>')
+elseif (coc#rpc#ready())
+call CocActionAsync('doHover')
+else
+execute '!' . &keywordprg . " " . expand('<cword>')
+endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
@@ -147,15 +148,15 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>fm  <Plug>(coc-format-selected)
+nmap <leader>fm  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+autocmd!
+" Setup formatexpr specified filetype(s).
+autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+" Update signature help on jump placeholder.
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
